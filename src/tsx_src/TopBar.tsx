@@ -45,10 +45,11 @@ import NavbarLink from "./ui_components/NavLink";
 
 function Navbar() {
   return (
-    <div className="flex flex-row justify-center items-center top-0 pr-3 pl-3 bg-purple-400 left-0 fixed h-[100vh] border-r z-10 overflow-hidden">
-      <div className="flex flex-row justify-center items-center">
+    <div className="bg-purple-400 flex flex-col items-center justify-center top-0 left-0 fixed h-[100vh] border-r-white z-10 overflow-hidden">
+      <div className="pr-2 pl-2 flex flex-col justify-center items-center">
         <CenteredContainer>
           <NavbarLink to="/" label="Home" />
+          <NavbarLink to="/file" label="File" />
           <NavbarLink to="/editor" label="Editor" />
         </CenteredContainer>
       </div>
