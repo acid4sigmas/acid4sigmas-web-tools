@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { DefaultButton } from "./ui_components/Button";
+import { DefaultButton } from "../ui_components/Button";
 
 interface FilePickerProps {
   fileTypes?: string[];
