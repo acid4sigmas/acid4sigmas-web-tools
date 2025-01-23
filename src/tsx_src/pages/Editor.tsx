@@ -1,6 +1,6 @@
 import TopBar from "../TopBar";
 import { Container } from "../ui_components/Container";
-import FilePicker from "../FilePicker";
+import FilePicker from "../files/FilePicker";
 import { ImageProcessor } from "../../../pkg/tester";
 import { useState, useEffect } from "react";
 import Grain from "../editor/Grain";
@@ -13,11 +13,11 @@ export default function Editor() {
     null,
   );
 
-  const loadImage = async (imageBase64: string) => {
+  const loadImage = async (image: Uint8Array) => {
     const canvasId = "image";
     try {
-      console.log(imageBase64);
-      const imageProcessor = new ImageProcessor(imageBase64, canvasId, 100);
+      console.log(image);
+      const imageProcessor = new ImageProcessor(image, canvasId, 100);
 
       setImageProcessor(imageProcessor);
 
@@ -28,9 +28,11 @@ export default function Editor() {
     }
   };
 
-  const handleFileSelect = (file: { name: string; base64: string } | null) => {
+  const handleFileSelect = (
+    file: { name: string; data: Uint8Array } | null,
+  ) => {
     if (file) {
-      loadImage(file.base64);
+      loadImage(file.data);
     } else {
       console.error("No file selected or file read error.");
     }
