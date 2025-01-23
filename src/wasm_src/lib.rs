@@ -2,6 +2,7 @@ mod effects;
 pub mod image_processor;
 use wasm_bindgen::prelude::*;
 mod cache;
+pub mod file_tools;
 
 #[wasm_bindgen]
 pub fn hello_js_from_wasm() {

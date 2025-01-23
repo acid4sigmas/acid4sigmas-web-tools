@@ -1,5 +1,4 @@
 use super::effects::{grain, pixelate};
-use base64::decode;
 use image::{imageops, Rgba, RgbaImage};
 use std::io::Cursor;
 use wasm_bindgen::{prelude::*, Clamped};
@@ -17,21 +16,13 @@ pub struct ImageProcessor {
     cache: ImageCache,
 }
 
-fn extract_base64(data_uri: &str) -> &str {
-    if let Some(pos) = data_uri.find(',') {
-        &data_uri[(pos + 1)..]
-    } else {
-        data_uri
-    }
-}
-
 #[wasm_bindgen]
 impl ImageProcessor {
     // Initialize with an image
 
     #[wasm_bindgen(constructor)]
     pub fn new(
-        base64_image: &str,
+        image_data: Vec<u8>,
         canvas_id: &str,
         cache_size: usize,
     ) -> Result<ImageProcessor, JsValue> {
@@ -41,11 +32,8 @@ impl ImageProcessor {
 
         log_to_console!("do we reach this?");
 
-        let decoded_image =
-            decode(extract_base64(base64_image)).map_err(|e| JsValue::from_str(&e.to_string()))?;
-
-        let img = image::load_from_memory(&decoded_image)
-            .map_err(|e| JsValue::from_str(&e.to_string()))?;
+        let img =
+            image::load_from_memory(&image_data).map_err(|e| JsValue::from_str(&e.to_string()))?;
 
         let mut processor = ImageProcessor {
             image: img.to_rgba8(),
