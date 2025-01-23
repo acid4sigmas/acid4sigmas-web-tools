@@ -29,6 +29,9 @@ function App() {
         please note that the editor is not quite finished yet, and the source
         code is not publicly available yet because i still need to clean up the
         repo :)
+        <a href="https://github.com/acid4sigmas/acid4sigmas-web-tools">
+          GitHub Repo
+        </a>
       </p>
     </Container>
   );
